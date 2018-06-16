@@ -6,3 +6,4 @@ scvSE
 dfh
 Git tracks changes of files.
 MY stupid boss still prefers SVN
+Creating a new branch is quick¡£
