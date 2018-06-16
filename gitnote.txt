@@ -1,0 +1,138 @@
+﻿$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+#创建文件夹及进入learngit
+$ mkdir learngit
+$ cd learngit
+
+#pwd命令用于显示当前目录
+$ pwd
+/c/Users/ASUS/learngit
+
+#git init命令把这个目录变成Git可以管理的仓库
+$ git init
+Initialized empty Git repository in /Users/michael/learngit/.git/
+
+#创建文件
+$ git add readme.txt
+#提交文件,commit一次可以提交多个文件
+$ git commit -m "wrote a readme file"
+[master (root-commit) eaadf4e] wrote a readme file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 readme.txt
+ 
+ #修改文件readme
+ #运行git status（掌握仓库当前状态）命令看看结果：
+ $ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+    modified:   readme.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+#git diff顾名思义就是查看difference
+$ git diff readme.txt 
+diff --git a/readme.txt b/readme.txt
+index 46d49bf..9247db6 100644
+--- a/readme.txt
++++ b/readme.txt
+@@ -1,2 +1,2 @@
+-Git is a version control system.
++Git is a distributed version control system.
+ Git is free software.
+ 
+#然后提交
+$ git add readme.txt
+$ git commit -m "add distributed"
+[master e475afc] add distributed
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+#版本回退
+#改动查看
+$ git log
+commit 5e631eb0f7de6322484442557cc13217693c75be (HEAD -> master)
+Author: DingZhiHong <1434967648@qq.com>
+Date:   Fri Jun 8 22:31:48 2018 +0800
+
+    append GPL
+
+commit 3ed7257075e4a411ce90c96edd633f3224ace120
+Author: DingZhiHong <1434967648@qq.com>
+Date:   Fri Jun 8 22:21:22 2018 +0800
+
+    add distributed
+
+commit fa33df24cad4f64494084ccc7fe8c73cbd252f13
+Author: DingZhiHong <1434967648@qq.com>
+Date:   Fri Jun 8 22:17:37 2018 +0800
+
+    wrote a readme file
+
+commit 5d3aabcd462e1ade2b2ccd5f2454a3fd55e594eb
+Author: DingZhiHong <1434967648@qq.com>
+Date:   Fri Jun 8 22:15:34 2018 +0800
+
+$ git log --pretty=oneline
+5e631eb0f7de6322484442557cc13217693c75be (HEAD -> master) append GPL
+3ed7257075e4a411ce90c96edd633f3224ace120 add distributed
+fa33df24cad4f64494084ccc7fe8c73cbd252f13 wrote a readme file
+5d3aabcd462e1ade2b2ccd5f2454a3fd55e594eb wrote a readme file 6
+5606748a58e2a8f7089f5524ffd22c1d9ae49144 wrote a readme file 6
+36aa808c0780b41c9e97eacd27aa491e02dff695 wrote a readme file 5
+d62baac46970f9d0d3483a3735a58a6f924c6ad9 wrote a readme file 3
+a600bb9eb2762766897c6c1c2e918d5a2c298ff6 wrote a readme file 2
+7bef1bab6326bced0cd867cf4251eb270f07a49e wrote a readme file
+
+#返回上一个版本（上上一个版本就是HEAD^^，往上100个版本写100个^比较容易数不过来，所以写成HEAD~100）
+$ git reset --hard HEAD^
+HEAD is now at e475afc add distributed
+#重新返回
+$ git reset --hard 5e63
+HEAD is now at 5e631eb append GPL
+
+#查看文件
+$ cat readme.txt
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+
+#Git提供了一个命令git reflog用来记录你的每一次命令：
+$ git reflog
+5e631eb (HEAD -> master) HEAD@{0}: reset: moving to 5e63
+3ed7257 HEAD@{1}: reset: moving to HEAD~
+5e631eb (HEAD -> master) HEAD@{2}: commit: append GPL
+3ed7257 HEAD@{3}: commit: add distributed
+
+#工作区和暂存区
+#工作区：就是你在电脑里能看到的目录
+#版本库：.git
+	#stage(index):暂存区
+
+#管理修改
+
+#撤销修改
+#修改后未上传至暂存区或者
+已经添加到暂存区又作了修改
+
+$ git checkout -- readme.txt
+回到最近一次git commit或git add的状态
+
+#将暂存区的修改撤销掉
+$ git reset HEAD readme.txt
+
+#小结
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD <file>，就回到了场景1，第二步按场景1操作。
+
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，git reset --hard HEAD^
+
+
+
+
+
