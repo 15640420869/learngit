@@ -230,8 +230,33 @@ $ git branch -D feature-vulcan
 	远程删除标签：先本地： ，后远程：$ git push origin :refs/tags/v0.9
 
 8、使用GitHub
+？？？
 
-	
+9、使用码云
+1、注册码云：QQ邮箱，970819z
+2、git remote -v查看远程库信息
+3、删除已有的GitHub远程库：git remote rm origin
+4、关联码云远程库：git remote add gitee git@gitee.com:liaoxuefeng/learngit.git
+5、
+如果要推送到GitHub，使用命令：
+git push github master
+如果要推送到码云，使用命令：
+git push gitee master
+┌─────────┐ ┌─────────┐
+│ GitHub         │  │  Gitee          │
+└─────────┘ └─────────┘
+         ▲                        ▲
+         └─────┬─────┘
+                       │
+           ┌─────────┐
+           │  Local Repo  │
+           └─────────┘
+
+10、自定义Git
+$ git config --global color.ui true
+
+11、忽略特殊为文件
+
 	
 	
 
