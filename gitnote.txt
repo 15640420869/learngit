@@ -256,9 +256,16 @@ git push gitee master
 $ git config --global color.ui true
 
 11、忽略特殊为文件
+12、配置别名
+$git config --global alias.st status#st 代表 status
+$ git config --global alias.co checkout
+$ git config --global alias.ci commit
+$ git config --global alias.br branch
+$ git config --global alias.unstage 'reset HEAD'	
+配置文件：.git/config   --  [alias]
 
-	
-	
+12、搭建Git服务器
+
 
 
 
